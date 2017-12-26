@@ -2,17 +2,170 @@
 <html>
 <head>
 	<title>Avanade Angular Academy by Gama - Simulado #1</title>
-	<meta charset="utf-8">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css">
 </head>
 <body>
-<main role="main" id="main"></main>
-<script
-  src="https://code.jquery.com/jquery-3.2.1.min.js"
-  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
-  crossorigin="anonymous"></script>
+
+  <main role="main" id="main">
+    <!-- Cabeçalho -->
+    <header class="container-fluid main_header flexbox_header">
+        <div class="flexbox_header_item">
+            <h1>Dê Propósito Para Seu Código</h1>
+            <p>Cansado de desenvolver projetos sem sentido? Participe do Avanade Angular Academy</p>
+            <button id="btn-apply-form" class="btn btn-success btn_apply_form" data-toggle="modal" data-target="#apply-modal">Inscreva-se</button>
+        </div>
+    </header>
+    <!-- Fecha Cabeçalho -->
+
+    <!-- Artigos -->
+    <article class="container-fluid main_article flex_box_article">
+
+      <div class="flex_box_article_item">
+          <h1>Inscrições</h1>
+          <p>02/dez a 04/jan</p>
+          <span>Para se inscrever basta preencher o formulário e se preparar para o nosso teste técnico com cursos online e simulados.</span>
+      </div>
+      <div class="flex_box_article_item">
+          <h1>Teste Técnico</h1>
+          <p>05 e 06/jan</p>
+          <span>Em seguida, prove que você está preparado fazendo os testes técnicos totalmente mão na massa.</span>
+      </div>
+      <div class="flex_box_article_item">
+          <h1>Seleção e <br>Contratação</h1>
+          <p>07/jan a 14/jan</p>
+          <span>Os melhores candidatos serão entrevistados e contratados pela Avanade.</span>
+      </div>
+      <div class="flex_box_article_item">
+          <h1>Treinamento</h1>
+          <p>15/jan a 26/jan</p>
+          <span>Serão duas semanas de treinamento super hands-on com os melhores devs do mercado.</span>
+      </div>
+      
+    </article>
+    <!-- Fecha Artigos -->
+
+    <!-- Modal -->
+    <div class="modal fade" id="apply-modal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Informe seu nome e e-mail</h5>
+            </div>
+            <div class="modal-body">
+                <div id="apply-success">
+                    <div class="alert alert-success">
+                        <strong>Sucesso!!</strong> Seu e-mail foi enviado com êxito.<span class="feedback_close">X</span>
+                    </div>
+                </div>
+                <div id="apply-error">
+                    <div class="alert alert-danger">
+                        <strong>Error!!</strong> E-mail ou Senha incorretos!.<span class="feedback_close">X</span>
+                    </div>
+                </div>
+                <form name="form" id="form-submit" action="" method="post">
+                    <div class="form-group">
+                        <div class="form-group-name">
+                            <label for="name" class="form-control-label">Nome:</label>
+                            <input type="text" class="form-control" name="name" id="name" required>
+                            <span id="feedback-name"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-group-email">
+                            <label for="email" class="form-control-label">E-mail:</label>
+                            <input type="text" class="form-control" name="email" id="email" pattern="^[^*]@[^*]+\.[a-z]{2,4}$" required></input>
+                            <span id="feedback-email"></span>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal" id="btn-close">Close</button>
+                        <button type="submit" class="btn btn-primary" id="btn-apply">Send e-mail</button>
+                    </div>
+                </form>
+            </div>
+          </div>
+        </div>
+    </div>
+    <!-- Fecha Modal -->
+    
+  </main>
+
+<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+<script>
+$(function () {
+
+    $('#btn-close').on('click', function () {
+        resetForm();
+    });
+
+    $('#btn-apply').on('click', function (e) {
+        e.preventDefault();
+        // adiciona o seletor do formulário na var form
+        var form = $('#form-submit');
+        // variável para armazenamento do nome
+        var name = $('#name').val();
+        // variável para armazenamento do e-mail 
+        var email = $('#email').val();
+        
+        $.ajax({
+            method: 'POST',
+            url: 'http://avanade.gama.academy/api/process_applications',
+            dataType: 'json',
+            headers: { EMAIL: 'paulo.h.g.pimentel@gmail.com' }, // coloque seu email que usou para se inscrever aqui!
+            contentType: 'application/json',
+            data: JSON.stringify({ process_application: { name: name, email: email } }),
+            success: function(json) { 
+                // Código de successo!
+                $('#apply-success').fadeIn(500);
+
+                $('.feedback_close').on('click', function() {
+                    $('#apply-success').fadeOut(500);
+                });
+                    
+                resetForm();
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                // Não esquece de tratar os erros
+                if (name == '' || email == '') { 
+                    $('#apply-error').fadeIn(500);
+
+                    $('.feedback_close').on('click', function() {
+                        $('#apply-error').fadeOut(500);
+                    });
+
+                    if (!name == '') {
+                        form.find('#feedback-email').fadeIn('slow').text(jqXHR.responseJSON.email);
+                        form.find('#feedback-name').fadeOut('slow');
+                    }
+                    else if (!email == ''){
+                        form.find('#feedback-name').fadeIn('slow').text(jqXHR.responseJSON.name);
+                        form.find('#feedback-email').fadeOut('slow');
+                        
+                    } else {
+                        form.find('#feedback-name').fadeIn('slow').text(jqXHR.responseJSON.name);
+                        form.find('#feedback-email').fadeIn('slow').text(jqXHR.responseJSON.email);
+                    }
+                }
+                for(var i in jqXHR.responseJSON) {
+                    console.log('O campo: ' + i + ', ' + jqXHR.responseJSON[i]);
+                } 
+            }
+        });
+    });
+
+    function resetForm() {
+        $('#apply-error').fadeOut();
+        $("input[type='text']").val('');
+        $('#feedback-name, #feedback-email').fadeOut();
+    }
+});
+</script>
 </body>
 </html>
